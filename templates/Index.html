@@ -1,0 +1,64 @@
+{{ define "Index" }}
+{{ template "Header" }}
+<div class="container">
+  <h2> Tool List </h2>
+
+  <p>
+      <a href="/new" class="btn btn-primary">New Entry</a>
+  </p>
+  <table id="tabledata" class="display" style="width: 100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>PetName</th>
+        <th>PetSpecies</th>
+        <th>Bloodtype</th>   
+        <th>Phone</th>
+        <th>PLZ</th>
+        <th>Street</th>
+        <th>Country</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>ID</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>PetName</th>
+        <th>PetSpecies</th>
+        <th>Bloodtype</th>   
+        <th>Phone</th>
+        <th>PLZ</th>
+        <th>Street</th>
+        <th>Country</th>
+        <th></th>       
+      </tr>
+    </tfoot>
+    <tbody>
+      {{ range . }}
+      <tr>
+        <td>{{ .Id }}</td>
+        <td> {{ .FirstName }}  </td>
+        <td> {{ .LastName }}  </td>
+        <td> {{ .PetName }}  </td>
+        <td> {{ .PetSpecies }}  </td>
+        <td> {{ .Bloodtype }}  </td>
+        <td> {{ .Phone }}  </td>
+        <td> {{ .PLZ }}  </td>
+        <td> {{ .Street }}  </td>
+        <td> {{ .Country }}  </td>
+        <td>
+          <a href="/show?id={{ .Id }}" class="btn btn-primary">View</a>
+          <a href="/edit?id={{ .Id }}" class="btn btn-primary">Edit</a>
+          <a href="/delete?id={{ .Id }}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+{{ template "Footer" }}
+{{ end }}

@@ -1,0 +1,20 @@
+{{ define "Show" }}
+  {{ template "Header" }}
+    <div class="container">
+        <h2>Entries(better change to something better..)</h2>
+        <p><strong>FirstName:</strong> {{ .FirstName }} </p>
+        <p><strong>LastName:</strong> {{ .LastName }} </p>
+        <p><strong>PetName:</strong>{{ .PetName }}</p>
+        <p><strong>PetSpecies:</strong>{{ .PetSpecies }}</p>
+        <p><strong>Bloodtype:</strong> {{ .Bloodtype }} </p>
+        <p><strong>Phone:</strong>{{ .Phone }}</p>
+        <p><strong>PLZ:</strong>{{ .PLZ }}</p>
+        <p><strong>Street:</strong>{{ .Street }}</p>
+        <p><strong>Country:</strong>{{ .Country }}</p>
+        <p><strong>Notes:</strong> {{ .Notes }} </p>
+        <br /> 
+        <a href="/edit?id={{ .Id }}" class="btn btn-primary">Edit</a>
+        <a href="/" class="btn btn-primary">Go back to entries</a>
+    </div>
+  {{ template "Footer" }}
+{{ end }}

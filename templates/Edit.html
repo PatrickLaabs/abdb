@@ -1,0 +1,51 @@
+{{ define "Edit" }}
+  {{ template "Header" }}
+    <div class="container col-5">
+        <h2>Edit Entries</h2>  
+        <form method="POST" action="/update">
+          <input type="hidden" name="uid" value="{{ .Id }}" />
+          <div class="form-group">
+              <label> FirstName </label>
+              <input type="text" name="firstname" value="{{ .FirstName }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> LastName </label>
+              <input type="text" name="lastname" value="{{ .LastName }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> PetName </label>
+              <input type="text" name="petName" value="{{ .PetName }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> PetSpecies </label>
+              <input type="text" name="petSpecies" value="{{ .PetSpecies }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> Bloodtype </label>
+              <input type="text" name="bloodType" value="{{ .Bloodtype }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> Phone </label>
+              <input type="text" name="phone" value="{{ .Phone }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> PLZ </label>
+              <input type="text" name="plz" value="{{ .PLZ }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> Street </label>
+              <input type="text" name="street" value="{{ .Street }}" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label> Country </label>
+              <input type="text" name="country" value="{{ .Country }}" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label> Notes </label>            
+            <textarea name="notes" class="form-control" cols="50" rows="5">{{ .Notes }}</textarea>
+          </div>
+          <input type="submit" value="Save entry" class="btn btn-primary" />
+        </form><br />
+    </div>  
+  {{ template "Footer" }}
+{{ end }}
