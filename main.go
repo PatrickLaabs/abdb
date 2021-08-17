@@ -8,7 +8,6 @@ import (
 	"text/template"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/joho/godotenv"
 )
 
 // Tool struct
@@ -226,10 +225,10 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	err := godotenv.Load()
+	/* err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
-	}
+	} */
 	log.Println("Server started on: http://localhost:8080")
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/show", Show)

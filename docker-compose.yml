@@ -13,10 +13,11 @@ services:
     volumes:
       - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - my-db:/var/lib/mysql
-  go:
-    image: ghcr.io/patricklaabs/abdb:latest
-    container_name: go
+  website:
+    image: ghcr.io/patricklaabs/abdb:0.0.2
     restart: always
+    env_file: 
+      - .env
     ports:
       - '8080:8080'
     volumes: 
