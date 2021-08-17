@@ -27,18 +27,13 @@ type Tool struct {
 }
 
 func dbConn() (db *sql.DB) {
-	os.Setenv("MYSQL_USER", "docker")
-	os.Setenv("MYSQL_PASSWORD", "docker")
-	os.Setenv("MYSQL_DATABASE", "abdb")
-
 	dbDriver := "mysql"
 	dbUser := os.Getenv("MYSQL_USER")
 	dbPass := os.Getenv("MYSQL_PASSWORD")
 	dbName := os.Getenv("MYSQL_DATABASE")
 	// dbServer := os.Getenv("DATABASE_SERVER")
 	dbPort := "3306"
-	// log.Println("Database host: " + dbServer)
-	//log.Println("Database port: " + dbPort)
+	//log.Println("Database host: " + dbServer)
 	log.Println("Database port: " + dbPort)
 	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+dbServer+":"+dbPort+")/"+dbName)
 	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)

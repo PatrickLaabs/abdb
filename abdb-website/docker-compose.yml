@@ -1,0 +1,20 @@
+version: '3.5'
+services: 
+  website:
+    image: ghcr.io/patricklaabs/abdb:latest
+    container_name: abdb-website
+    restart: always
+    networks: 
+      - nets
+    ports: 
+      - 8080:8080
+    expose: 
+      - '8080'
+    env_file: 
+      - ../.env
+    volumes: 
+      - .././templates/:/templates/
+      - ../.env:/.env
+networks: 
+  nets:
+    driver: bridge
