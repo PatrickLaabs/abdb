@@ -124,6 +124,9 @@ func Show(w http.ResponseWriter, r *http.Request) {
 func New(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "New", nil)
 }
+func Test(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "Test", nil)
+}
 
 func Edit(w http.ResponseWriter, r *http.Request) {
 	db := dbConn()
@@ -231,6 +234,7 @@ func main() {
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/show", Show)
 	http.HandleFunc("/new", New)
+	http.HandleFunc("/test", Test)
 	http.HandleFunc("/edit", Edit)
 	http.HandleFunc("/insert", Insert)
 	http.HandleFunc("/update", Update)
