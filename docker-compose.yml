@@ -14,7 +14,7 @@ services:
       - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - my-db:/var/lib/mysql
   website:
-    image: ghcr.io/patricklaabs/abdb:0.0.2
+    image: ghcr.io/patricklaabs/abdb:0.0.3
     restart: always
     env_file: 
       - .env
@@ -22,5 +22,6 @@ services:
       - '8080:8080'
     volumes: 
       - ./templates/:/templates/
+      - ./.env:/.env
 volumes:
   my-db:
