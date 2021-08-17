@@ -31,12 +31,14 @@ func dbConn() (db *sql.DB) {
 	dbUser := os.Getenv("MYSQL_USER")
 	dbPass := os.Getenv("MYSQL_PASSWORD")
 	dbName := os.Getenv("MYSQL_DATABASE")
-	// dbServer := os.Getenv("DATABASE_SERVER")
+	// dbServer := os.Getenv("MYSQL_SERVER")
 	dbPort := "3306"
-	//log.Println("Database host: " + dbServer)
+	// log.Println("Database host: " + dbServer)
 	log.Println("Database port: " + dbPort)
-	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+dbServer+":"+dbPort+")/"+dbName)
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"0.0.0.0"+":"+dbPort+")/"+dbName)
+	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
+
+	// db, err := sql.Open("mysql", "docker:docker@tcp(:3306)/abdb")
 	if err != nil {
 		panic(err.Error())
 	}
