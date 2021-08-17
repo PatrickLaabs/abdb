@@ -2,6 +2,7 @@ version: '3.3'
 services:
   db:
     image: mysql:latest
+    container_name: mysql
     restart: always
     env_file: 
       - .env
@@ -12,5 +13,13 @@ services:
     volumes:
       - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - my-db:/var/lib/mysql
+  go:
+    image: ghcr.io/patricklaabs/abdb:latest
+    container_name: go
+    restart: always
+    ports:
+      - '8080:8080'
+    volumes: 
+      - ./templates/:/templates/
 volumes:
   my-db:
