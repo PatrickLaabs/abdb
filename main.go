@@ -28,14 +28,16 @@ type Tool struct {
 
 func dbConn() (db *sql.DB) {
 	dbDriver := "mysql"
-	dbUser := os.Getenv("DATABASE_USERNAME")
-	dbPass := os.Getenv("DATABASE_PASSWORD")
-	dbName := os.Getenv("DATABASE_NAME")
-	dbServer := os.Getenv("DATABASE_SERVER")
-	dbPort := os.Getenv("DATABASE_PORT")
-	log.Println("Database host: " + dbServer)
+	dbUser := os.Getenv("MYSQL_USER")
+	dbPass := os.Getenv("MYSQL_PASSWORD")
+	dbName := os.Getenv("MYSQL_DATABASE")
+	// dbServer := os.Getenv("DATABASE_SERVER")
+	dbPort := "3306"
+	// log.Println("Database host: " + dbServer)
+	//log.Println("Database port: " + dbPort)
 	log.Println("Database port: " + dbPort)
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+dbServer+":"+dbPort+")/"+dbName)
+	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+dbServer+":"+dbPort+")/"+dbName)
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
 	if err != nil {
 		panic(err.Error())
 	}
