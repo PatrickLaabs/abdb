@@ -9,3 +9,4 @@ run `go run main.go` inside root dir
 Docker-compose will set up the desired db with the table needed etc etc.
 The Go Application connects to it and hosts a website where we can interact with the database.
 
+./ngrock http 8080
