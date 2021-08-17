@@ -27,6 +27,10 @@ type Tool struct {
 }
 
 func dbConn() (db *sql.DB) {
+	os.Setenv("MYSQL_USER", "docker")
+	os.Setenv("MYSQL_PASSWORD", "docker")
+	os.Setenv("MYSQL_DATABASE", "abdb")
+
 	dbDriver := "mysql"
 	dbUser := os.Getenv("MYSQL_USER")
 	dbPass := os.Getenv("MYSQL_PASSWORD")
