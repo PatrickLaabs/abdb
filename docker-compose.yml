@@ -1,16 +1,43 @@
-version: '3.3'
+version: '3.5'
 services:
   db:
     image: mysql:latest
+    container_name: mysql
     restart: always
+    networks: 
+      net:
+        ipv4_address: 172.19.0.2
+    ports: 
+      - 3306:3306
+    expose: 
+      - '3306'
     env_file: 
       - .env
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
     volumes:
       - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - my-db:/var/lib/mysql
+  website:
+    image: ghcr.io/patricklaabs/abdb:latest
+    container_name: abdb-website
+    restart: always
+    networks: 
+      net:
+        ipv4_address: 172.19.0.3
+    links: 
+      - 'db:database'
+    ports: 
+      - 8080:8080
+    expose: 
+      - '8080'
+    env_file: 
+      - .env
+    volumes: 
+      - ./templates/:/templates/
+      - .env:/.env
 volumes:
   my-db:
+networks:
+  net:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24

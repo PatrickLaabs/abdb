@@ -31,13 +31,14 @@ func dbConn() (db *sql.DB) {
 	dbUser := os.Getenv("MYSQL_USER")
 	dbPass := os.Getenv("MYSQL_PASSWORD")
 	dbName := os.Getenv("MYSQL_DATABASE")
-	// dbServer := os.Getenv("DATABASE_SERVER")
+	// dbServer := os.Getenv("MYSQL_SERVER")
 	dbPort := "3306"
 	// log.Println("Database host: " + dbServer)
-	//log.Println("Database port: " + dbPort)
 	log.Println("Database port: " + dbPort)
-	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+dbServer+":"+dbPort+")/"+dbName)
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"172.19.0.2"+":"+dbPort+")/"+dbName)
+	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
+
+	// db, err := sql.Open("mysql", "docker:docker@tcp(:3306)/abdb")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -122,6 +123,9 @@ func Show(w http.ResponseWriter, r *http.Request) {
 
 func New(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "New", nil)
+}
+func Test(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "Test", nil)
 }
 
 func Edit(w http.ResponseWriter, r *http.Request) {
@@ -230,6 +234,7 @@ func main() {
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/show", Show)
 	http.HandleFunc("/new", New)
+	http.HandleFunc("/test", Test)
 	http.HandleFunc("/edit", Edit)
 	http.HandleFunc("/insert", Insert)
 	http.HandleFunc("/update", Update)
