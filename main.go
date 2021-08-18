@@ -35,7 +35,7 @@ func dbConn() (db *sql.DB) {
 	dbPort := "3306"
 	// log.Println("Database host: " + dbServer)
 	log.Println("Database port: " + dbPort)
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"0.0.0.0"+":"+dbPort+")/"+dbName)
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"172.19.0.2"+":"+dbPort+")/"+dbName)
 	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
 
 	// db, err := sql.Open("mysql", "docker:docker@tcp(:3306)/abdb")
