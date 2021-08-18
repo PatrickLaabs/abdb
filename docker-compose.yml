@@ -17,7 +17,7 @@ services:
       - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - my-db:/var/lib/mysql
   website:
-    image: ghcr.io/patricklaabs/abdb:0.0.6
+    image: ghcr.io/patricklaabs/abdb:latest
     container_name: abdb-website
     restart: always
     networks: 
