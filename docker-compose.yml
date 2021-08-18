@@ -4,6 +4,9 @@ services:
     image: mysql:latest
     container_name: mysql
     restart: always
+    networks: 
+      net:
+        ipv4_address: 172.19.0.2
     ports: 
       - 3306:3306
     expose: 
@@ -14,9 +17,12 @@ services:
       - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - my-db:/var/lib/mysql
   website:
-    image: ghcr.io/patricklaabs/abdb:0.0.5
+    image: ghcr.io/patricklaabs/abdb:0.0.6
     container_name: abdb-website
     restart: always
+    networks: 
+      net:
+        ipv4_address: 172.19.0.3
     links: 
       - 'db:database'
     ports: 
@@ -30,3 +36,8 @@ services:
       - .env:/.env
 volumes:
   my-db:
+networks:
+  net:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24
