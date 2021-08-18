@@ -4,8 +4,6 @@ services:
     image: mysql:latest
     container_name: mysql
     restart: always
-    networks: 
-      - nets
     ports: 
       - 3306:3306
     expose: 
@@ -21,8 +19,6 @@ services:
     restart: always
     links: 
       - 'db:database'
-    networks: 
-      - nets
     ports: 
       - 8080:8080
     expose: 
@@ -34,6 +30,3 @@ services:
       - .env:/.env
 volumes:
   my-db:
-networks: 
-  nets:
-    driver: bridge

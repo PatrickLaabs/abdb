@@ -4,8 +4,6 @@ services:
     image: mysql:latest
     container_name: mysql
     restart: always
-    networks: 
-      - nets
     ports: 
       - 3306:3306
     expose: 
@@ -17,6 +15,3 @@ services:
       - my-db:/var/lib/mysql
 volumes:
   my-db:
-networks: 
-  nets:
-    driver: bridge
