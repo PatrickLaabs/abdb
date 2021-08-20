@@ -26,6 +26,16 @@ Now you can't develop on the go code itself and quickly test the interaction wit
 
 If everythings working, push and release it to gh.
 
+> // This connectionstring is needed, if we wanna push this code to a container.
+> // db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"172.19.0.2"+":"+dbPort+")/"+dbName)
+>
+> // This connectionstring is for local development purposes only.
+> db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"0.0.0.0"+":"+dbPort+")/"+dbName)
+
+### Hot Reload of changes
+
+use air - making lives easier :P 
+
 ### Todos:
 
 - [ ] create pipeline from scm checkout to deploying on my raspberry or k8s in cloud

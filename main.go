@@ -35,7 +35,13 @@ func dbConn() (db *sql.DB) {
 	dbPort := "3306"
 	// log.Println("Database host: " + dbServer)
 	log.Println("Database port: " + dbPort)
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"172.19.0.2"+":"+dbPort+")/"+dbName)
+
+	// This connectionstring is needed, if we wanna push this code to a container.
+	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"172.19.0.2"+":"+dbPort+")/"+dbName)
+
+	// This connectionstring is for local development purposes only.
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"0.0.0.0"+":"+dbPort+")/"+dbName)
+
 	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
 
 	// db, err := sql.Open("mysql", "docker:docker@tcp(:3306)/abdb")
@@ -124,8 +130,13 @@ func Show(w http.ResponseWriter, r *http.Request) {
 func New(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "New", nil)
 }
-func Test(w http.ResponseWriter, r *http.Request) {
-	tmpl.ExecuteTemplate(w, "Test", nil)
+
+func EntriesList(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "EntriesList", nil)
+}
+
+func Cover(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "Cover", nil)
 }
 
 func Edit(w http.ResponseWriter, r *http.Request) {
@@ -234,7 +245,8 @@ func main() {
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/show", Show)
 	http.HandleFunc("/new", New)
-	http.HandleFunc("/test", Test)
+	http.HandleFunc("/entrieslist", EntriesList)
+	http.HandleFunc("/cover", Cover)
 	http.HandleFunc("/edit", Edit)
 	http.HandleFunc("/insert", Insert)
 	http.HandleFunc("/update", Update)
