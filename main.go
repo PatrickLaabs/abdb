@@ -37,10 +37,10 @@ func dbConn() (db *sql.DB) {
 	log.Println("Database port: " + dbPort)
 
 	// This connectionstring is needed, if we wanna push this code to a container.
-	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"172.19.0.2"+":"+dbPort+")/"+dbName)
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"172.19.0.2"+":"+dbPort+")/"+dbName)
 
 	// This connectionstring is for local development purposes only.
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"0.0.0.0"+":"+dbPort+")/"+dbName)
+	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+"0.0.0.0"+":"+dbPort+")/"+dbName)
 
 	// db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(:"+dbPort+")/"+dbName)
 
@@ -132,7 +132,39 @@ func New(w http.ResponseWriter, r *http.Request) {
 }
 
 func EntriesList(w http.ResponseWriter, r *http.Request) {
-	tmpl.ExecuteTemplate(w, "EntriesList", nil)
+	db := dbConn()
+	selDB, err := db.Query("SELECT * FROM tools ORDER BY id DESC")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	tool := Tool{}
+	res := []Tool{}
+
+	for selDB.Next() {
+		var id, phone, plz int
+		var firstname, lastname, petname, petspecies, bloodtype, street, country, notes string
+		err := selDB.Scan(&id, &firstname, &lastname, &petname, &petspecies, &bloodtype, &phone, &plz, &street, &country, &notes)
+		if err != nil {
+			panic(err.Error())
+		}
+		log.Println("Listing Row: Id " + string(rune(id)) + " | firstname " + firstname + " | lastname " + lastname + " | petname " + petname + " | petspecies " + petspecies + " | bloodtype " + bloodtype + " | phone " + string(rune(phone)) + " | plz " + string(rune(plz)) + " | street " + street + " | country " + country + " | notes " + notes)
+
+		tool.Id = id
+		tool.FirstName = firstname
+		tool.LastName = lastname
+		tool.PetName = petname
+		tool.PetSpecies = petspecies
+		tool.Bloodtype = bloodtype
+		tool.Phone = phone
+		tool.PLZ = plz
+		tool.Street = street
+		tool.Country = country
+		tool.Notes = notes
+		res = append(res, tool)
+	}
+	tmpl.ExecuteTemplate(w, "EntriesList", res)
+	defer db.Close()
 }
 
 func Cover(w http.ResponseWriter, r *http.Request) {
