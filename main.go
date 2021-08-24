@@ -148,7 +148,7 @@ func EntriesList(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err.Error())
 		}
-		log.Println("Listing Row: Id " + string(rune(id)) + " | firstname " + firstname + " | lastname " + lastname + " | petname " + petname + " | petspecies " + petspecies + " | bloodtype " + bloodtype + " | phone " + string(rune(phone)) + " | plz " + string(rune(plz)) + " | street " + street + " | country " + country + " | notes " + notes)
+		log.Println("Listing EntriesList Row: Id " + string(rune(id)) + " | firstname " + firstname + " | lastname " + lastname + " | petname " + petname + " | petspecies " + petspecies + " | bloodtype " + bloodtype + " | phone " + string(rune(phone)) + " | plz " + string(rune(plz)) + " | street " + street + " | country " + country + " | notes " + notes)
 
 		tool.Id = id
 		tool.FirstName = firstname
